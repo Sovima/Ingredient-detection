@@ -18,6 +18,3 @@ Model to identify ingredients from an image
 - [ ] Test amd adjust the parameters (March 1 - 6)
 - [ ] The rest (Whenever)
 - [ ] Add a good description for the project
-'''
-
-'''
