@@ -13,6 +13,7 @@ Important links:
 [ ] Research the best models and pick the most appropriate one (Feb 23 - 27)
 [ ] Test amd adjust the parameters (March 1 - 6)
 [ ] The rest (Whenever)
+[ ] Add a good description for the project
 '''
 
 '''
