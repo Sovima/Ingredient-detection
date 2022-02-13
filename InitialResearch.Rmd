@@ -5,3 +5,13 @@ output: html_notebook
 ## Important links
 * https://www.soupersage.com/blog/30-most-popular-recipe-ingredients-2019/
 * https://flowingdata.com/2018/09/18/cuisine-ingredients/
+* https://www.kaggle.com/shuyangli94/food-com-recipes-and-user-interactions?select=ingr_map.pkl - ingredient data (can be sorted by frequency)
+
+```{r}
+ingr_filepath <- '/Users/sofyamalashchenko/Documents/Sofya/Uni\ stuff/Waterloo\ Winter\ 2022/Ingredient-detection/ingr_map.csv'
+ingr <- read.csv(ingr_filepath)
+ingr
+```
+```{r}
+unique(ingr["replaced"])
+```
