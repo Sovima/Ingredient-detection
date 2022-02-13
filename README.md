@@ -8,8 +8,8 @@ Model to identify ingredients from an image
 - [ ] Find the images for most common ingredients (Start with small amounts, only look at most common ones). (Feb 13)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Important links:
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * [Fruits and veggies](https://www.kaggle.com/kritikseth/fruit-and-vegetable-image-recognition)
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; * [Open food facts](https://world.openfoodfacts.org/cgi/search.pl?search_terms=ketchup&search_simple=1&action=process)
+* [Fruits and veggies](https://www.kaggle.com/kritikseth/fruit-and-vegetable-image-recognition)
+* [Open food facts](https://world.openfoodfacts.org/cgi/search.pl?search_terms=ketchup&search_simple=1&action=process)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; For usage see [openfoodfacts git](https://github.com/openfoodfacts/openfoodfacts-python/blob/develop/docs/Usage.md)
 
