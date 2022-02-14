@@ -78,3 +78,8 @@ temp <- temp[!(temp$replaced %in% commonIngredients), ]
 head(temp[order(-temp$count),], 20)
 ```
 Based on this, I will select the top 20 ingredients that are not in the commonIngredients list.
+Now, we will see how many recipes are covered with the top 20 ingredients and ingredients from the commonIngredients list
+see https://www.rdocumentation.org/packages/prob/versions/1.0-1/topics/setdiff
+```
+
+```
