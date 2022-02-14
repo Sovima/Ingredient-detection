@@ -61,6 +61,19 @@ temp <- ingr[!duplicated(ingr$replaced),]
 head(temp[order(-temp$count),], 15)
 ```
 Investigating what 'flmy' is:
+```{r}
+head(ingr[ingr$replaced == "flmy", ])
 ```
+Clearly, this stands for flour. 
 
+Of the top 15 ingredients, salt and water can be assumed. Also, garlic clove and garlic can be combined into 1. Removing these ingredients from the top 15, we get
+```{r}
+# Adjusting the list further, I decided to combine all-purpose flower with flower,
+# baking powder and baking soda
+commonIngredients <- c('salt', 'water', 'garlic clove', 
+                       'salt and pepper', 'all-purpose flmy',
+                       'baking soda', 'vanilla')
+temp <- ingr[!duplicated(ingr$replaced),]
+temp <- temp[!(temp$replaced %in% commonIngredients), ]
+head(temp[order(-temp$count),], 20)
 ```
