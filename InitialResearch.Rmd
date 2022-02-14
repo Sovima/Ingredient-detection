@@ -6,12 +6,61 @@ output: html_notebook
 * https://www.soupersage.com/blog/30-most-popular-recipe-ingredients-2019/
 * https://flowingdata.com/2018/09/18/cuisine-ingredients/
 * https://www.kaggle.com/shuyangli94/food-com-recipes-and-user-interactions?select=ingr_map.pkl - ingredient data (can be sorted by frequency)
-
+```{r}
+library(stringr)
+```
+The ingredients map was originally downloaded in the .pkl format and converted to csv in python. Now, it can be loaded into the R notebook  
 ```{r}
 ingr_filepath <- '/Users/sofyamalashchenko/Documents/Sofya/Uni\ stuff/Waterloo\ Winter\ 2022/Ingredient-detection/ingr_map.csv'
 ingr <- read.csv(ingr_filepath)
 ingr
 ```
+The plan is to look at most used ingredients and use those as the starting point for the data collection process. 
+
+All available ingredients:
 ```{r}
 unique(ingr["replaced"])
+```
+From here we can easily get the top most used ingredients however I would like to perform further research on the available recipes. 
+
+First, loading the recipe data from the same notebook and adding a column "NumIngredients" containing the number of ingredients required for each recipe.
+```{r}
+recipes_filepath <- '/Users/sofyamalashchenko/Documents/Sofya/Uni\ stuff/Waterloo\ Winter\ 2022/Ingredient-detection/PP_recipes.csv'
+recipes <- read.csv(recipes_filepath)
+```
+First, convert the ingredient_ids column into a list format
+```{r}
+recipes$SepIngredients <- apply(recipes, 1, 
+                                FUN = function(x) as.numeric(scan(text=substr(x["ingredient_ids"],
+                                                                   2, 
+                                                                   nchar(x["ingredient_ids"])-1), 
+                                                       what='',
+                                                       sep = ',',
+                                                       strip.white = TRUE, 
+                                                       quiet = TRUE)))
+# Then count the number of ingredients in each and add it to a new column
+recipes$NumIngredients <- apply(recipes, 1, FUN = function(x) length(x$SepIngredients))
+recipes
+```
+Now, getting the frequency histogram for the number of ingredients.
+```{r}
+hist(recipes$NumIngredients,
+     breaks = 20,
+     main = "Number of ingredients in a recipe",
+     xlab = "Number of ingredients",
+     ylab = "Number of recipes")
+```
+```{r}
+boxplot(recipes$NumIngredients,
+        ylab = "Number of ingredients",
+        main = "The barplot for Number of ingredients")
+```
+From the two graphs above we see that most recipes have less than 15 ingredients and 20 ingredients is the max. Looking at the top 15 ingredients we see
+```{r}
+temp <- ingr[!duplicated(ingr$replaced),]
+head(temp[order(-temp$count),], 15)
+```
+Investigating what 'flmy' is:
+```
+
 ```
