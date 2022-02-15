@@ -1,6 +1,6 @@
 ---
 title: "R Notebook"
-output: html_notebook
+output: html_document
 ---
 ## Important links
 * https://www.soupersage.com/blog/30-most-popular-recipe-ingredients-2019/
