@@ -13,13 +13,13 @@ The ingredients map was originally downloaded in the .pkl format and converted t
 ```{r}
 ingr_filepath <- '/Users/sofyamalashchenko/Documents/Sofya/Uni\ stuff/Waterloo\ Winter\ 2022/Ingredient-detection/ingr_map.csv'
 ingr <- read.csv(ingr_filepath)
-ingr
+head(ingr)
 ```
 The plan is to look at most used ingredients and use those as the starting point for the data collection process. 
 
 All available ingredients:
 ```{r}
-unique(ingr["replaced"])
+head(unique(ingr["replaced"]))
 ```
 From here we can easily get the top most used ingredients however I would like to perform further research on the available recipes. 
 
@@ -30,17 +30,16 @@ recipes <- read.csv(recipes_filepath)
 ```
 First, convert the ingredient_ids column into a list format
 ```{r}
-recipes$SepIngredients <- apply(recipes, 1, 
-                                FUN = function(x) as.numeric(scan(text=substr(x["ingredient_ids"],
-                                                                   2, 
-                                                                   nchar(x["ingredient_ids"])-1), 
-                                                       what='',
-                                                       sep = ',',
-                                                       strip.white = TRUE, 
-                                                       quiet = TRUE)))
+recipes$SepIngredients <- apply(recipes, 1, FUN = function(x)
+        as.numeric(scan(text=substr(x["ingredient_ids"], 2, 
+                                    nchar(x["ingredient_ids"])-1), 
+                        what='',
+                        sep = ',',
+                        strip.white = TRUE, 
+                        quiet = TRUE)))
 # Then count the number of ingredients in each and add it to a new column
 recipes$NumIngredients <- apply(recipes, 1, FUN = function(x) length(x$SepIngredients))
-recipes
+head(recipes)
 ```
 Now, getting the frequency histogram for the number of ingredients.
 ```{r}
@@ -80,6 +79,21 @@ head(temp[order(-temp$count),], 20)
 Based on this, I will select the top 20 ingredients that are not in the commonIngredients list.
 Now, we will see how many recipes are covered with the top 20 ingredients and ingredients from the commonIngredients list
 see https://www.rdocumentation.org/packages/prob/versions/1.0-1/topics/setdiff
+My strategy for that is to go over all recipes, removing the ingredients that are in the commonIngredients list from each recipe.
+```{r}
+commonIngredients <- c('salt', 'water', 'garlic clove', 
+                       'salt and pepper', 'all-purpose flmy',
+                       'baking soda', 'vanilla', 'butter',
+                       'egg', 'onion', 'sugar', 'olive oil', 
+                       'milk', 'flmy', 'pepper', 'brown sugar', 
+                       'garlic', 'baking powder','scallion',
+                       'cheddar','parmesan cheese', 'lemon juice',
+                       'vegetable oil', 'carrot', 'sour cream', 
+                       'cinnamon', 'black pepper')
+recipes$RemainingIngr <- apply(recipes, 1, FUN = function(x) setdiff(x["SepIngredients"], 
+                                                               commonIngredients))
 ```
-
+The results:
+```{r}
+head(recipes$RemainingIngr)
 ```
