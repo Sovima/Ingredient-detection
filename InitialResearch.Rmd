@@ -74,7 +74,7 @@ commonIngredients <- c('salt', 'water', 'garlic clove',
                        'baking soda', 'vanilla')
 temp <- ingr[!duplicated(ingr$replaced),]
 temp <- temp[!(temp$replaced %in% commonIngredients), ]
-head(temp[order(-temp$count),], 20)
+head(temp[order(-temp$count),], 15)
 ```
 Based on this, I will select the top 20 ingredients that are not in the commonIngredients list.
 Now, we will see how many recipes are covered with the top 20 ingredients and ingredients from the commonIngredients list
@@ -90,10 +90,23 @@ commonIngredients <- c('salt', 'water', 'garlic clove',
                        'cheddar','parmesan cheese', 'lemon juice',
                        'vegetable oil', 'carrot', 'sour cream', 
                        'cinnamon', 'black pepper')
+commonIngredientsNum <-  apply(ingr, 1, FUN = function(x) if (x["replaced"] 
+                                                                 %in% commonIngredients)
+                                                                 {x["id"]})
+commonIngredientsNum <- strtoi(unique(commonIngredientsNum))[2:28]
+commonIngredientsNum
+```
+
+```{r}
 recipes$RemainingIngr <- apply(recipes, 1, FUN = function(x) setdiff(x["SepIngredients"], 
-                                                               commonIngredients))
+                                                               commonIngredientsNum))
+recipes$RemainingIngrNum <- apply(recipes, 1, FUN = function(x) len(x["RemainingIngr"]))
 ```
 The results:
 ```{r}
-head(recipes$RemainingIngr)
+hist(recipes$RemainingIngr,
+     breaks = 20,
+     main = "Number of ingredients in a recipe",
+     xlab = "Number of ingredients",
+     ylab = "Number of recipes")
 ```
