@@ -31,7 +31,7 @@ recipes <- read.csv(recipes_filepath)
 First, convert the ingredient_ids column into a list format
 ```{r}
 recipes$SepIngredients <- apply(recipes, 1, FUN = function(x)
-        as.numeric(scan(text=substr(x["ingredient_ids"], 2, 
+        strtoi(scan(text=substr(x["ingredient_ids"], 2, 
                                     nchar(x["ingredient_ids"])-1), 
                         what='',
                         sep = ',',
@@ -39,7 +39,9 @@ recipes$SepIngredients <- apply(recipes, 1, FUN = function(x)
                         quiet = TRUE)))
 # Then count the number of ingredients in each and add it to a new column
 recipes$NumIngredients <- apply(recipes, 1, FUN = function(x) length(x$SepIngredients))
-head(recipes)
+```
+```{r}
+head(recipes$SepIngredients)
 ```
 Now, getting the frequency histogram for the number of ingredients.
 ```{r}
@@ -98,13 +100,16 @@ commonIngredientsNum
 ```
 
 ```{r}
-recipes$RemainingIngr <- apply(recipes, 1, FUN = function(x) setdiff(x["SepIngredients"], 
-                                                               commonIngredientsNum))
-recipes$RemainingIngrNum <- apply(recipes, 1, FUN = function(x) len(x["RemainingIngr"]))
+recipes$RemainingIngr <- apply(recipes, 1, FUN = function(x)
+        setdiff(x["SepIngredients"], commonIngredientsNum))
+recipes$RemainingIngrNum <- apply(recipes, 1, FUN = function(x) length(x["RemainingIngr"]))
+```
+```{r}
+recipes$RemainingIngr[4]
 ```
 The results:
 ```{r}
-hist(recipes$RemainingIngr,
+hist(recipes$RemainingIngrNum,
      breaks = 20,
      main = "Number of ingredients in a recipe",
      xlab = "Number of ingredients",
