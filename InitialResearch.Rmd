@@ -122,12 +122,12 @@ The results:
 ```{r}
 hist(recipes$RemainingIngrNum,
      breaks = 20,
-     main = "Number of ingredients in a recipe",
-     xlab = "Number of ingredients",
+     main = "Remaining number of ingredients in a recipe",
+     xlab = "Remaining number of ingredients",
      ylab = "Number of recipes")
 ```
 ```{r}
 boxplot(recipes$RemainingIngrNum,
         ylab = "Number of ingredients",
-        main = "The barplot for Number of ingredients")
+        main = "The barplot for remaining number of ingredients")
 ```
