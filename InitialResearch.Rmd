@@ -105,7 +105,7 @@ recipes$RemainingIngr <- apply(recipes, 1, FUN = function(x)
         setdiff(x$SepIngredients, commonIngredientsNum))
 recipes$RemainingIngrNum <- apply(recipes, 1, FUN = function(x)
         length(x$RemainingIngr))
-head(recipes)
+head(recipes, 2)
 ```
 The results:
 ```{r}
