@@ -126,3 +126,8 @@ hist(recipes$RemainingIngrNum,
      xlab = "Number of ingredients",
      ylab = "Number of recipes")
 ```
+```{r}
+boxplot(recipes$RemainingIngrNum,
+        ylab = "Number of ingredients",
+        main = "The barplot for Number of ingredients")
+```
