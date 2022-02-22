@@ -4,7 +4,7 @@ Model to identify ingredients from an image
 
 ## General plan
 
-- [ ] Review most common ingredients and get a visual in R if necessary (Feb 12)
+- [X] Review most common ingredients and get a visual in R if necessary (Feb 12)
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; The data from [here](https://www.kaggle.com/shuyangli94/food-com-recipes-and-user-interactions?select=ingr_map.pkl) has been uploaded to the R notebook. It can be sorted by the number of occurences in the recipes so I can easily extract the most common ingredients. However, I will explore this dataset more to understand general patterns.
 
