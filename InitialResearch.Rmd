@@ -99,7 +99,7 @@ commonIngredientsNum <-  apply(ingr, 1, FUN = function(x) if (x["replaced"]
 commonIngredientsNum <- strtoi(unique(commonIngredientsNum))[2:28]
 commonIngredientsNum
 ```
-
+Now, for each recipe we determine the ingredients that are not in the common Ingredients list. We will also count them to know how well we can cover the recipes with the top 20 ingredients
 ```{r}
 recipes$RemainingIngr <- apply(recipes, 1, FUN = function(x)
         setdiff(x$SepIngredients, commonIngredientsNum))
