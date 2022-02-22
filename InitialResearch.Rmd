@@ -28,7 +28,11 @@ First, loading the recipe data from the same notebook and adding a column "NumIn
 recipes_filepath <- '/Users/sofyamalashchenko/Documents/Sofya/Uni\ stuff/Waterloo\ Winter\ 2022/Ingredient-detection/PP_recipes.csv'
 recipes <- read.csv(recipes_filepath)
 ```
-First, convert the ingredient_ids column into a list format
+```{r}
+head(recipes)
+```
+First, convert the ingre
+dient_ids column into a list format
 ```{r}
 recipes$SepIngredients <- apply(recipes, 1, FUN = function(x)
         strtoi(scan(text=substr(x["ingredient_ids"], 2, 
@@ -41,7 +45,7 @@ recipes$SepIngredients <- apply(recipes, 1, FUN = function(x)
 recipes$NumIngredients <- apply(recipes, 1, FUN = function(x) length(x$SepIngredients))
 ```
 ```{r}
-head(recipes$SepIngredients)
+head(recipes)
 ```
 Now, getting the frequency histogram for the number of ingredients.
 ```{r}
@@ -92,6 +96,7 @@ commonIngredients <- c('salt', 'water', 'garlic clove',
                        'cheddar','parmesan cheese', 'lemon juice',
                        'vegetable oil', 'carrot', 'sour cream', 
                        'cinnamon', 'black pepper')
+
 commonIngredientsNum <-  apply(ingr, 1, FUN = function(x) if (x["replaced"] 
                                                                  %in% commonIngredients)
                                                                  {x["id"]})
@@ -100,12 +105,18 @@ commonIngredientsNum
 ```
 
 ```{r}
+check <- apply(head(recipes), 1, FUN = function(x)  length(setdiff(x$SepIngredients, commonIngredientsNum)))
+check
+```
+
+```{r}
 recipes$RemainingIngr <- apply(recipes, 1, FUN = function(x)
-        setdiff(x["SepIngredients"], commonIngredientsNum))
-recipes$RemainingIngrNum <- apply(recipes, 1, FUN = function(x) length(x["RemainingIngr"]))
+        setdiff(x$SepIngredients, commonIngredientsNum))
+recipes$RemainingIngrNum <- apply(recipes, 1, FUN = function(x)
+        length(x$RemainingIngr))
 ```
 ```{r}
-recipes$RemainingIngr[4]
+head(recipes, 20)
 ```
 The results:
 ```{r}
