@@ -120,3 +120,4 @@ boxplot(recipes$RemainingIngrNum,
         ylab = "Number of ingredients",
         main = "The barplot for remaining number of ingredients")
 ```
+We will now collect the images for the above mentioned ingredients. Note multiple datasets will be used since I couldn't find one that contained all necessary ingredients.
