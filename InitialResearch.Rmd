@@ -121,3 +121,13 @@ boxplot(recipes$RemainingIngrNum,
         main = "The barplot for remaining number of ingredients")
 ```
 We will now collect the images for the above mentioned ingredients. Note multiple datasets will be used since I couldn't find one that contained all necessary ingredients.
+```{r}
+commonIngredients
+```
+```{r}
+assumed <- 'Assume everyone has it'
+kaggleFruitsVeg <- "https://www.kaggle.com/kritikseth/fruit-and-vegetable-image-recognition"
+source <- c(assumed, assumed, assumed, kaggleFruitsVeg, kaggleFruitsVeg, 
+            kaggleFruitsVeg, assumed, kaggleFruitsVeg, kaggleFruitsVeg, kaggleFruitsVeg,
+            assumed)
+```
