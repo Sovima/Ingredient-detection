@@ -17,4 +17,12 @@ def main(ingredients):
             continue
         ingridient_image = search_result['products'][0]['image_url']
         print(ingridient_image)
-main(["tomato", "potato", "apple", "pasta", "tuna", "ketchup"])
+main(['salt', 'water', 'garlic clove', 
+                       'salt and pepper', 'all-purpose flmy',
+                       'baking soda', 'vanilla', 'butter',
+                       'egg', 'onion', 'sugar', 'olive oil', 
+                       'milk', 'flmy', 'pepper', 'brown sugar', 
+                       'garlic', 'baking powder','scallion',
+                       'cheddar','parmesan cheese', 'lemon juice',
+                       'vegetable oil', 'carrot', 'sour cream', 
+                       'cinnamon', 'black pepper'])
