@@ -11,6 +11,8 @@ Model to identify ingredients from an image
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; I would like to know how well the top 15 ingredients cover the recipes. That is, how many recipes I can get with only top 15 most common ingredients. 
 
 - [ ] Find the images for most common ingredients (Start with small amounts, only look at most common ones). (Feb 13)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Note: might need to filter the current images
+
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Important links:
 * [Fruits and veggies](https://www.kaggle.com/kritikseth/fruit-and-vegetable-image-recognition)
