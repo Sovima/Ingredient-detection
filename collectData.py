@@ -21,13 +21,7 @@ def main(ingredients):
 
         ingridient_image = search_result['products'][0]['image_url']
         print(ingridient_image)
-main(["brown sugar"])
-'''main(['salt', 'water', 'garlic clove', 
-                       'salt and pepper', 'all-purpose flour',
-                       'baking soda', 'vanilla', 'butter',
-                       'egg', 'onion', 'sugar', 'olive oil', 
-                       'milk', 'flour', 'pepper', 'brown sugar', 
-                       'garlic', 'baking powder','scallion',
-                       'cheddar','parmesan cheese', 'lemon juice',
-                       'vegetable oil', 'carrot', 'sour cream', 
-                       'cinnamon', 'black pepper'])'''
+main(['baking soda', 'vanilla', 'butter', 'egg', 'onion', 'sugar', 'oil', 
+                       'milk', 'flour', 'pepper', 'brown sugar', 'baking powder',
+                       'cheddar','parmesan cheese', 'lemon juice', 'sour cream', 
+                       'cinnamon'])
