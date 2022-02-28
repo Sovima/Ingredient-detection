@@ -12,6 +12,7 @@ def main(ingredients):
         search_result = openfoodfacts.products.advanced_search({
             "search_terms": ingredient,
             "sort_by":"unique_scans_n",
+            "page_size" : 1000,
             "json" : 1
             })
 
@@ -42,3 +43,10 @@ main(['baking soda', 'vanilla', 'butter', 'egg', 'onion', 'sugar', 'oil',
                        'milk', 'flour', 'pepper', 'brown sugar', 'baking powder',
                        'cheddar','parmesan cheese', 'lemon juice', 'sour cream', 
                        'cinnamon'])
+
+# Use raw sugar instead of sugar
+# Baking powder and baking soda are the same thing
+# onions are in the vegetables dataset
+# try searching for specific oils and put them all into oil
+# Try putting vanilla extract instead of vanilla
+# Do something different for eggs
