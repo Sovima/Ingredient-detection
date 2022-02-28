@@ -50,3 +50,4 @@ main(['baking soda', 'vanilla', 'butter', 'egg', 'onion', 'sugar', 'oil',
 # try searching for specific oils and put them all into oil
 # Try putting vanilla extract instead of vanilla
 # Do something different for eggs
+# Put sugar and brown sugar into the same category
