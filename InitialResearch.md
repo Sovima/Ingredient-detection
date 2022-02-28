@@ -319,4 +319,27 @@ boxplot(recipes$RemainingIngrNum,
         main = "The barplot for remaining number of ingredients")
 ```
 
-![](InitialResearch_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+![](InitialResearch_files/figure-gfm/unnamed-chunk-14-1.png)<!-- --> We
+will now collect the images for the above mentioned ingredients. Note
+multiple datasets will be used since I couldn’t find one that contained
+all necessary ingredients.
+
+``` r
+commonIngredients
+```
+
+    ##  [1] "salt"             "water"            "garlic clove"     "salt and pepper" 
+    ##  [5] "all-purpose flmy" "baking soda"      "vanilla"          "butter"          
+    ##  [9] "egg"              "onion"            "sugar"            "olive oil"       
+    ## [13] "milk"             "flmy"             "pepper"           "brown sugar"     
+    ## [17] "garlic"           "baking powder"    "scallion"         "cheddar"         
+    ## [21] "parmesan cheese"  "lemon juice"      "vegetable oil"    "carrot"          
+    ## [25] "sour cream"       "cinnamon"         "black pepper"
+
+``` r
+assumed <- 'Assume everyone has it'
+kaggleFruitsVeg <- "https://www.kaggle.com/kritikseth/fruit-and-vegetable-image-recognition"
+source <- c(assumed, assumed, assumed, kaggleFruitsVeg, kaggleFruitsVeg, 
+            kaggleFruitsVeg, assumed, kaggleFruitsVeg, kaggleFruitsVeg, kaggleFruitsVeg,
+            assumed)
+```
