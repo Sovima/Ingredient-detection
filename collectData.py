@@ -51,3 +51,12 @@ main(['baking soda', 'vanilla', 'butter', 'egg', 'onion', 'sugar', 'oil',
 # Try putting vanilla extract instead of vanilla
 # Do something different for eggs
 # Put sugar and brown sugar into the same category
+# Add lemon juice to lemon
+# search different types of milk
+# Get pepper from veg dataset
+# Butter seems to return the most irrelevant data as of now
+'''
+Finished ingredients:
+- Baking Powder and Baking soda - need to combine
+- Lemon juice
+'''
