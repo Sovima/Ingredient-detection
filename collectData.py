@@ -39,10 +39,9 @@ def main(ingredients):
                 i += 1
                 curr += 1
 
-main(['baking soda', 'vanilla', 'butter', 'egg', 'onion', 'sugar', 'oil', 
-                       'milk', 'flour', 'pepper', 'brown sugar', 'baking powder',
-                       'cheddar','parmesan cheese', 'lemon juice', 'sour cream', 
-                       'cinnamon'])
+main(['vanilla extract', 'dairy butter', 'eggs', 'raw sugar', 'olive oil', 
+    'vegetable oil', 'dairy milk', 'almond milk', 'oat milk', 'all-purpose flour', 'raw brown sugar',
+    'cheddar cheese','parmesan cheese', 'lemon juice', 'sour cream', 'cinnamon powder'])
 
 # Use raw sugar instead of sugar
 # Baking powder and baking soda are the same thing
