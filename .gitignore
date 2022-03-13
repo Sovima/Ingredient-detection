@@ -1,0 +1,6 @@
+.DS_Store
+*.pkl
+
+#data
+PP_recipes.csv
+ingredients
