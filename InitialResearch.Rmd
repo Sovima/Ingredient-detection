@@ -1,0 +1,133 @@
+---
+title: "R Notebook"
+output: github_document
+---
+## Important links
+* https://www.soupersage.com/blog/30-most-popular-recipe-ingredients-2019/
+* https://flowingdata.com/2018/09/18/cuisine-ingredients/
+* https://www.kaggle.com/shuyangli94/food-com-recipes-and-user-interactions?select=ingr_map.pkl - ingredient data (can be sorted by frequency)
+```{r}
+library(stringr)
+```
+The ingredients map was originally downloaded in the .pkl format and converted to csv in python. Now, it can be loaded into the R notebook  
+```{r}
+ingr_filepath <- '/Users/sofyamalashchenko/Documents/Sofya/Uni\ stuff/Waterloo\ Winter\ 2022/Ingredient-detection/ingr_map.csv'
+ingr <- read.csv(ingr_filepath)
+head(ingr, 2)
+```
+The plan is to look at most used ingredients and use those as the starting point for the data collection process. 
+
+All available ingredients:
+```{r}
+head(unique(ingr["replaced"]))
+```
+From here we can easily get the top most used ingredients however I would like to perform further research on the available recipes. 
+
+First, loading the recipe data from the same notebook and adding a column "NumIngredients" containing the number of ingredients required for each recipe.
+```{r}
+recipes_filepath <- '/Users/sofyamalashchenko/Documents/Sofya/Uni\ stuff/Waterloo\ Winter\ 2022/Ingredient-detection/PP_recipes.csv'
+recipes <- read.csv(recipes_filepath)
+head(recipes, 2)
+```
+First, convert the ingre
+dient_ids column into a list format
+```{r}
+recipes$SepIngredients <- apply(recipes, 1, FUN = function(x)
+        strtoi(scan(text=substr(x["ingredient_ids"], 2, 
+                                    nchar(x["ingredient_ids"])-1), 
+                        what='',
+                        sep = ',',
+                        strip.white = TRUE, 
+                        quiet = TRUE)))
+# Then count the number of ingredients in each and add it to a new column
+recipes$NumIngredients <- apply(recipes, 1, FUN = function(x) length(x$SepIngredients))
+head(recipes, 2)
+```
+Now, getting the frequency histogram for the number of ingredients.
+```{r}
+hist(recipes$NumIngredients,
+     breaks = 20,
+     main = "Number of ingredients in a recipe",
+     xlab = "Number of ingredients",
+     ylab = "Number of recipes")
+```
+```{r}
+boxplot(recipes$NumIngredients,
+        ylab = "Number of ingredients",
+        main = "The barplot for Number of ingredients")
+```
+From the two graphs above we see that most recipes have less than 15 ingredients and 20 ingredients is the max. Looking at the top 15 ingredients we see
+```{r}
+temp <- ingr[!duplicated(ingr$replaced),]
+head(temp[order(-temp$count),], 2)
+```
+Investigating what 'flmy' is:
+```{r}
+head(ingr[ingr$replaced == "flmy", ])
+```
+Clearly, this stands for flour. 
+
+Of the top 15 ingredients, salt and water can be assumed. Also, garlic clove and garlic can be combined into 1. Removing these ingredients from the top 15, we get
+```{r}
+# Adjusting the list further, I decided to combine all-purpose flower with flower,
+# baking powder and baking soda
+commonIngredients <- c('salt', 'water', 'garlic clove', 
+                       'salt and pepper', 'all-purpose flmy',
+                       'baking soda', 'vanilla')
+temp <- ingr[!duplicated(ingr$replaced),]
+temp <- temp[!(temp$replaced %in% commonIngredients), ]
+head(temp[order(-temp$count),], 15)
+```
+Based on this, I will select the top 20 ingredients that are not in the commonIngredients list.
+Now, we will see how many recipes are covered with the top 20 ingredients and ingredients from the commonIngredients list
+see https://www.rdocumentation.org/packages/prob/versions/1.0-1/topics/setdiff
+My strategy for that is to go over all recipes, removing the ingredients that are in the commonIngredients list from each recipe.
+```{r}
+commonIngredients <- c('salt', 'water', 'garlic clove', 
+                       'salt and pepper', 'all-purpose flmy',
+                       'baking soda', 'vanilla', 'butter',
+                       'egg', 'onion', 'sugar', 'olive oil', 
+                       'milk', 'flmy', 'pepper', 'brown sugar', 
+                       'garlic', 'baking powder','scallion',
+                       'cheddar','parmesan cheese', 'lemon juice',
+                       'vegetable oil', 'carrot', 'sour cream', 
+                       'cinnamon', 'black pepper')
+
+commonIngredientsNum <-  apply(ingr, 1, FUN = function(x) if (x["replaced"] 
+                                                                 %in% commonIngredients)
+                                                                 {x["id"]})
+commonIngredientsNum <- strtoi(unique(commonIngredientsNum))[2:28]
+commonIngredientsNum
+```
+Now, for each recipe we determine the ingredients that are not in the common Ingredients list. We will also count them to know how well we can cover the recipes with the top 20 ingredients
+```{r}
+recipes$RemainingIngr <- apply(recipes, 1, FUN = function(x)
+        setdiff(x$SepIngredients, commonIngredientsNum))
+recipes$RemainingIngrNum <- apply(recipes, 1, FUN = function(x)
+        length(x$RemainingIngr))
+head(recipes, 2)
+```
+The results:
+```{r}
+hist(recipes$RemainingIngrNum,
+     breaks = 20,
+     main = "Remaining number of ingredients in a recipe",
+     xlab = "Remaining number of ingredients",
+     ylab = "Number of recipes")
+```
+```{r}
+boxplot(recipes$RemainingIngrNum,
+        ylab = "Number of ingredients",
+        main = "The barplot for remaining number of ingredients")
+```
+We will now collect the images for the above mentioned ingredients. Note multiple datasets will be used since I couldn't find one that contained all necessary ingredients.
+```{r}
+commonIngredients
+```
+```{r}
+assumed <- 'Assume everyone has it'
+kaggleFruitsVeg <- "https://www.kaggle.com/kritikseth/fruit-and-vegetable-image-recognition"
+source <- c(assumed, assumed, assumed, kaggleFruitsVeg, kaggleFruitsVeg, 
+            kaggleFruitsVeg, assumed, kaggleFruitsVeg, kaggleFruitsVeg, kaggleFruitsVeg,
+            assumed)
+```
