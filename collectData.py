@@ -20,7 +20,7 @@ def main(ingredients):
             print("search for ingredient " + ingredient + " returned empty")
             continue
         l = len(search_result['products'])
-        length = min(l, 100)
+        length = min(l, 1000)
         curr = 0
         i = 0
         while 1:
@@ -39,10 +39,11 @@ def main(ingredients):
                 i += 1
                 curr += 1
 
-main(['vanilla extract', 'dairy butter', 'eggs', 'raw sugar', 'olive oil', 
-    'vegetable oil', 'dairy milk', 'almond milk', 'oat milk', 'all-purpose flour', 'raw brown sugar',
-    'cheddar cheese','parmesan cheese', 'lemon juice', 'sour cream', 'cinnamon powder'])
-
+main(["granny smith", "cripps pink", "pink lady", "gala apples"])
+# [ 'olive oil', 
+#     'vegetable oil', 'dairy milk', 'almond milk', 'oat milk', 'all-purpose flour', 'raw brown sugar',
+#     'cheddar cheese','parmesan cheese', 'lemon juice', 'sour cream', 'cinnamon powder']
+# 'vanilla extract', 'dairy butter', 'eggs', 'raw sugar',
 # Use raw sugar instead of sugar
 # Baking powder and baking soda are the same thing
 # onions are in the vegetables dataset
@@ -54,8 +55,3 @@ main(['vanilla extract', 'dairy butter', 'eggs', 'raw sugar', 'olive oil',
 # search different types of milk
 # Get pepper from veg dataset
 # Butter seems to return the most irrelevant data as of now
-'''
-Finished ingredients:
-- Baking Powder and Baking soda - need to combine
-- Lemon juice
-'''
